@@ -1,6 +1,8 @@
 var Welcome = Backbone.Model.extend({
 
 	initialize: function(){
-		$("#initial").append("<p>Test</p>")
+		$("#initial").append(
+			"<div id='welcome'>Welcome!</div>"
+			)
 	}
 })

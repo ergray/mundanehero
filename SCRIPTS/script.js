@@ -1,5 +1,4 @@
 $(document).ready(function(){
 	console.log("hi");
-	welcome = new Welcome;
-	return welcome
+	welcome = new Welcome
 })

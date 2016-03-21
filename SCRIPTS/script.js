@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	console.log("hi");
 	welcome = new Welcome;
-	return welcome
+	start = new Start;
+	startButton = new StartButton
 })

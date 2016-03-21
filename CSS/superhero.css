@@ -1,5 +1,25 @@
+body,html {
+	margin:0;
+	padding:0;
+}
+
 #initial {
+}
+
+#welcome {
+	position: absolute;
+	text-align: center;/
+	height: 50px;
+	right: 0;
+	left: 0;
 	border: 1px solid black;
-	width: 20px;
-	height: 20px;
+	position: absolute;
+	background-color: grey;
+	clear: right;
+}
+
+#start {
+	position: absolute;
+	top: 60px;
+	margin-left: 47%;
 }

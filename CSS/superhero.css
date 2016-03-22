@@ -23,3 +23,29 @@ body,html {
 	top: 60px;
 	margin-left: 47%;
 }
+
+.answers {
+	position: absolute;
+	top: 60px;
+	height: 70px:;
+}
+
+#a1Container{
+	float: left;
+	position: relative;
+	top: 60px;
+	margin-left: 20%;
+}
+
+#a2Container{
+	float:right;
+	position: relative;
+	top: 60px;
+	margin-right: 20%;
+}
+
+#answer1 {
+}
+
+#answer2 {
+}

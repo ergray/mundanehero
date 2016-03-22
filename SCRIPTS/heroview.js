@@ -9,6 +9,6 @@ var StartButton = Backbone.View.extend({
 	// },
 
 	register: function(){
-		console.log("i seee ya")
+		var questions = new Questions;
 	}
 })

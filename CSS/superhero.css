@@ -24,6 +24,13 @@ body,html {
 	margin-left: 47%;
 }
 
+#nameSpace {
+	float:right;
+	position: relative;
+	top: 60px;
+	margin-right: 20%;
+}
+
 .answers {
 	position: absolute;
 	top: 60px;

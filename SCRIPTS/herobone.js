@@ -18,14 +18,32 @@ var Start = Backbone.Model.extend({
 			"</div>"
 			);
 		startButton = new StartButton({ el: $('#start')});
-		startButton.render()
 	}
+})
+
+var HeroName = Backbone.Model.extend({
+
+	initialize: function(){
+		$("#start").remove();
+		$("#initial").append(
+			"<div id='nameSpace'>"+
+			"<form>"+
+			"Please state your name: <input type='text' id='myName'><br>"+
+			"<input type='submit' id='giveName' value='Thats Me'>"+
+			"</form>"+
+			"</div>"
+			);
+		$("#initial span:nth-child(1)").text("Who are you?");
+		$("#initial span:nth-child(3)").remove();
+		catchName = new CatchName({el: $('#nameSpace')})
+	}	
 })
 
 var Questions = Backbone.Model.extend({
 
-	initialize: function(){
-		$("#start").remove();
+
+	initialize: function(options){
+		$("#nameSpace").remove();
 		$("#initial").append(
 			"<div id='a1Container'>"+
 			"<button id='answer1'>A1</button>"+
@@ -36,7 +54,7 @@ var Questions = Backbone.Model.extend({
 			"<button id='answer2'>A2</button>"+
 			"</div>"
 			);
-		$("#initial span:nth-child(1)").text("Question");
+		$("#initial span:nth-child(1)").text("Question for you, " +options+ ".");
 		$("#initial span:nth-child(3)").remove()				
 	}
 })

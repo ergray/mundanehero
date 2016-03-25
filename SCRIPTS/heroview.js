@@ -25,6 +25,20 @@ var CatchName = Backbone.View.extend({
 
 	makeProfile: function(e){
 		e.preventDefault();
+		console.log('making profiles');
+		startProfile();
 		var questions = new Questions($("#myName").val())
+	}
+})
+
+var QuestionButtons = Backbone.View.extend({
+
+	events: {
+		"click .answers" : "nextPlease"
+	},
+
+	nextPlease: function(e){
+		e.preventDefault();
+		console.log(e.target)
 	}
 })

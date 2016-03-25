@@ -25,10 +25,9 @@ body,html {
 }
 
 #nameSpace {
-	float:right;
 	position: relative;
 	top: 60px;
-	margin-right: 20%;
+	margin-left: 40%;
 }
 
 .answers {

@@ -46,15 +46,16 @@ var Questions = Backbone.Model.extend({
 		$("#nameSpace").remove();
 		$("#initial").append(
 			"<div id='a1Container'>"+
-			"<button id='answer1'>A1</button>"+
+			"<button class='answers' id='answer1'>A1</button>"+
 			"</div>"
 			);
 		$("#initial").append(
 			"<div id='a2Container'>"+
-			"<button id='answer2'>A2</button>"+
+			"<button class='answers' id='answer2'>A2</button>"+
 			"</div>"
 			);
 		$("#initial span:nth-child(1)").text("Question for you, " +options+ ".");
-		$("#initial span:nth-child(3)").remove()				
+		$("#initial span:nth-child(3)").remove();
+		var questionButtons = new QuestionButtons({el: $('#initial')})			
 	}
 })

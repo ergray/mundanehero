@@ -33,12 +33,20 @@ var CatchName = Backbone.View.extend({
 
 var QuestionButtons = Backbone.View.extend({
 
+
+	initialize: function(options){
+		model: options.model
+	},
+
 	events: {
 		"click .answers" : "nextPlease"
 	},
 
 	nextPlease: function(e){
 		e.preventDefault();
+		this.model.questionCount+1;
+		console.log(this.model);
+		console.log(questionCount);
 		console.log(e.target)
 	}
 })

@@ -106,7 +106,7 @@ var QuestionButtons = Backbone.View.extend({
 			[{Question : "A speeding bus is coming at you! Do you:"},{AnswerOne : "Stand still and take it!"},{AnswerTwo : "Dodge out of the way!" }],
 			[{Question : "Your office is calling!"},{AnswerOne : "Pick up the phone..."},{AnswerTwo : "I have bigger concerns!" }],
 			[{Question : "Are you straight or gay?"},{AnswerOne : "Straight"},{AnswerTwo : "Gay" }],
-			[{Question : "Are we alone?"},{AnswerOne : "I\'ts a cold, silent universe."},{AnswerTwo : "Something is out there, waiting." }],
+			[{Question : "Are we alone?"},{AnswerOne : "It\'s a cold, silent universe."},{AnswerTwo : "Something is out there, waiting." }],
 			[{Question : "The last issue of Super Amazo is sold out everywhere!"},{AnswerOne : "Eh, I\'ll just sprint over to the next state and get one there."},{AnswerTwo : "Who gives a shit about comics?" }]
 		];
 	},

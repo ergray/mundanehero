@@ -60,3 +60,9 @@ body,html {
 
 #answer2 {
 }
+
+#checkAnswers {
+	position: relative;
+	top: 60px;
+	margin-left: 20%;
+}

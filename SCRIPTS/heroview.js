@@ -75,7 +75,7 @@ var Questions = Backbone.View.extend({
 
 	
 	initialize: function(options){
-
+		var ourName = options;
 		$("#nameSpace").remove();
 		$("#initial span:nth-child(3)").show();
 		$("#initial").append(
@@ -88,9 +88,9 @@ var Questions = Backbone.View.extend({
 			"<button class='answers' id='answer2'>Female</button>"+
 			"</div>"
 			);
-		$("#initial span:nth-child(1)").text("Question for you, " +options+ ".");
+		$("#initial span:nth-child(1)").text("Question for you, " +ourName+ ".");
 		$("#initial span:nth-child(3)").text("Are you male or female?");
-		var questionButtons = new QuestionButtons({el: $('#initial'), model: this})//, listOfQuestions, questionCount)			
+		var questionButtons = new QuestionButtons({el: $('#initial')}, ourName)
 	}
 })
 
@@ -99,7 +99,8 @@ var QuestionButtons = Backbone.View.extend({
 
 
 	initialize: function(options){
-
+		this.ourName = arguments[1];
+		this.answers = [];
 		this.questionCount = 1;
 		this.listOfQuestions = [
 			[{Question : "Are you male or female?"},{AnswerOne : "Male"},{AnswerTwo : "Female" }],
@@ -117,9 +118,38 @@ var QuestionButtons = Backbone.View.extend({
 
 	nextPlease: function(e){
 		e.preventDefault;
+		this.answers.push($(e.target)[0].innerHTML);
+		if (this.questionCount >= this.listOfQuestions.length){
+			var tallyAnswers = new TallyAnswers({el: $('#initial')}, this.answers, this.listOfQuestions, this.ourName);
+			return
+		};
+		// console.log($(e.target)[0].innerHTML);
 		$("#initial span:nth-child(3)").text(this.listOfQuestions[this.questionCount][0].Question);
 		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
 		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
 		this.questionCount+=1;
+	}
+})
+
+var TallyAnswers = Backbone.View.extend({
+
+	initialize: function(){
+		this.ourName = arguments[3];
+		this.answers = arguments[1];
+		this.listOfQuestions = arguments[2];
+		console.log(this.listOfQuestions);
+		$("#initial span:nth-child(1)").text("Thank you, " +this.ourName+ ".");
+		$("#initial span:nth-child(3)").text('Can you please verify that the below are correct?');
+		$("#a1Container").remove();
+		$("#a2Container").remove();
+		console.log('hello?');
+		$("#initial").append(
+			"<div id='checkAnswers'></div>"
+			);
+		for (i = 0; i<this.listOfQuestions.length; i++){
+			$("#checkAnswers").append(
+					"<div>Question: "+this.listOfQuestions[i][0].Question+"<br>Answer: "+this.answers[i]+"</div><br>"
+				)
+		}
 	}
 })

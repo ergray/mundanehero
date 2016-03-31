@@ -75,6 +75,8 @@ var Questions = Backbone.View.extend({
 
 	
 	initialize: function(options){
+		this.questionCount = 0;
+		this.answers = [];
 		var ourName = options;
 		$("#nameSpace").remove();
 		$("#initial span:nth-child(3)").show();
@@ -133,6 +135,11 @@ var QuestionButtons = Backbone.View.extend({
 
 var TallyAnswers = Backbone.View.extend({
 
+	events: {
+		'click #confirm' : "nextPhase",
+		'click #restart' : "beginAgain"
+	},
+
 	initialize: function(){
 		this.ourName = arguments[3];
 		this.answers = arguments[1];
@@ -150,6 +157,15 @@ var TallyAnswers = Backbone.View.extend({
 			$("#checkAnswers").append(
 					"<div>Question: "+this.listOfQuestions[i][0].Question+"<br>Answer: "+this.answers[i]+"</div><br>"
 				)
-		}
+		};
+		$("#checkAnswers").append(
+			"<br>"+
+			"<button id='confirm'>Looks Good!</button><button id='restart'>Nah, let me change that</button>"
+		)
+	},
+
+	beginAgain: function(){
+		$("#checkAnswers").remove();
+		var questions = new Questions(this.ourName)
 	}
 })

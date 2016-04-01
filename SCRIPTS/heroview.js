@@ -8,12 +8,12 @@ var Begin = Backbone.View.extend({
 	render: function(){
 		$("#initial").append(
 			"<div id='welcome'>"+
-			"<span>Welcome!</span><br>"+
-			"<span>Please click start when ready.</span></div>"
+			"<h1 id='header'>Welcome!</h1>"+
+			"<p id='subheader'>Please click start when ready.</p></div>"
 		);
 		$("#initial").append(
 			"<div id='start'>"+
-			"<button id='buttonBegin'>Start!</button>"+
+			"<button class='button' id='buttonBegin'>Start!</button>"+
 			"</div>"
 			);
 		startButton = new StartButton({ el: $('#start')});
@@ -22,7 +22,7 @@ var Begin = Backbone.View.extend({
 })
 
 var StartButton = Backbone.View.extend({
-	
+
 	events: {
 		"click #buttonBegin": "register"
 	},
@@ -43,15 +43,15 @@ var HeroName = Backbone.View.extend({
 		$("#initial").append(
 			"<div id='nameSpace'>"+
 			"<form>"+
-			"Please state your name: <input type='text' id='myName'><br>"+
-			"<input type='submit' id='giveName' value='Thats Me'>"+
+			"<p>Please state your name: <input type='text' id='myName' required></p>"+
+			"<input class='button' type='submit' id='giveName' value='That&#39;s Me'>"+
 			"</form>"+
 			"</div>"
 			);
-		$("#initial span:nth-child(1)").text("Who are you?");
-		$("#initial span:nth-child(3)").hide();
+		$("#initial #header").text("Who are you?");
+		$("#initial #subheader").hide();
 		catchName = new CatchName({el: $('#nameSpace')})
-	}	
+	}
 })
 
 var CatchName = Backbone.View.extend({
@@ -73,25 +73,25 @@ var CatchName = Backbone.View.extend({
 
 var Questions = Backbone.View.extend({
 
-	
+
 	initialize: function(options){
 		this.questionCount = 0;
 		this.answers = [];
 		var ourName = options;
 		$("#nameSpace").remove();
-		$("#initial span:nth-child(3)").show();
+		$("#initial #subheader").show();
 		$("#initial").append(
+			"<div id='answersContainer'>"+
 			"<div id='a1Container'>"+
-			"<button class='answers' id='answer1'>Male</button>"+
-			"</div>"
-			);
-		$("#initial").append(
+			"<div class='answers'><p id='answer1'>Male</p></div>"+
+			"</div>"+
 			"<div id='a2Container'>"+
-			"<button class='answers' id='answer2'>Female</button>"+
+			"<div class='answers'><p id='answer2'>Female</p></div>"+
+			"</div>"+
 			"</div>"
 			);
-		$("#initial span:nth-child(1)").text("Question for you, " +ourName+ ".");
-		$("#initial span:nth-child(3)").text("Are you male or female?");
+		$("#initial #header").text("Question for you, " +ourName+ ".");
+		$("#initial #subheader").text("Are you male or female?");
 		var questionButtons = new QuestionButtons({el: $('#initial')}, ourName)
 	}
 })
@@ -120,13 +120,13 @@ var QuestionButtons = Backbone.View.extend({
 
 	nextPlease: function(e){
 		e.preventDefault;
-		this.answers.push($(e.target)[0].innerHTML);
+		this.answers.push($(e.target)[0].innerText);
 		if (this.questionCount >= this.listOfQuestions.length){
 			var tallyAnswers = new TallyAnswers({el: $('#initial')}, this.answers, this.listOfQuestions, this.ourName);
 			return
 		};
 		// console.log($(e.target)[0].innerHTML);
-		$("#initial span:nth-child(3)").text(this.listOfQuestions[this.questionCount][0].Question);
+		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
 		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
 		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
 		this.questionCount+=1;
@@ -145,22 +145,24 @@ var TallyAnswers = Backbone.View.extend({
 		this.answers = arguments[1];
 		this.listOfQuestions = arguments[2];
 		console.log(this.listOfQuestions);
-		$("#initial span:nth-child(1)").text("Thank you, " +this.ourName+ ".");
-		$("#initial span:nth-child(3)").text('Can you please verify that the below are correct?');
-		$("#a1Container").remove();
-		$("#a2Container").remove();
+		$("#initial #header").text("Thank you, " +this.ourName+ ".");
+		$("#initial #subheader").text('Can you please verify that the below are correct?');
+		$("#answersContainer").remove();
 		console.log('hello?');
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);
 		for (i = 0; i<this.listOfQuestions.length; i++){
 			$("#checkAnswers").append(
-					"<div>Question: "+this.listOfQuestions[i][0].Question+"<br>Answer: "+this.answers[i]+"</div><br>"
+					"<div class='question'>"+
+					"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
+					"<p><span class='bold'>Answer:</span> "+this.answers[i]+"</p>"+
+					"</div>"
 				)
 		};
 		$("#checkAnswers").append(
 			"<br>"+
-			"<button id='confirm'>Looks Good!</button><button id='restart'>Nah, let me change that</button>"
+			"<button class='button' id='confirm'>Looks Good!</button><button class='button' id='restart'>Nah, let me change that</button>"
 		)
 	},
 

@@ -75,6 +75,7 @@ var Questions = Backbone.View.extend({
 
 
 	initialize: function(options){
+		console.log(this.answers);
 		this.options = options;
 		this.ourName = options.name;
 		this.render(options.name);
@@ -134,10 +135,12 @@ var QuestionButtons = Backbone.View.extend({
 		e.preventDefault;
 		console.log(this.listOfQuestions.length);
 		console.log(this.questionCount);
+		console.log('next Pleasing');
 		this.answers.push($(e.target)[0].innerHTML);
 		if (this.questionCount >= this.listOfQuestions.length){
 			this.questionCount = 1;
-			var tallyAnswers = new TallyAnswers({el: $('#initial')}, this.answers, this.listOfQuestions, this.ourName);
+			var tallyAnswers = new TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName});
+			this.undelegateEvents();
 			return
 		};
 		// console.log($(e.target)[0].innerHTML);
@@ -155,14 +158,35 @@ var TallyAnswers = Backbone.View.extend({
 		'click #restart' : "beginAgain"
 	},
 
-	initialize: function(){
-		this.ourName = arguments[3];
-		this.answers = arguments[1];
-		this.listOfQuestions = arguments[2];
+	initialize: function(options){
+		console.log(options);
+		this.ourName = options.ourName;
+		this.answers = options.answers;
+		this.listOfQuestions = options.listOfQuestions;
 		$("#initial #header").text("Thank you, " +this.ourName+ ".");
 		$("#initial #subheader").text('Can you please verify that the below are correct?');
 		$("#answersContainer").remove();
-		console.log('hello?');
+		console.log('Initialize from TallyAnswers');
+		this.render();
+		// $("#initial").append(
+		// 	"<div id='checkAnswers'></div>"
+		// 	);
+		// for (i = 0; i<this.listOfQuestions.length; i++){
+		// 	$("#checkAnswers").append(
+		// 			"<div class='question'>"+
+		// 			"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
+		// 			"<p><span class='bold'>Answer:</span> "+this.answers[i]+"</p>"+
+		// 			"</div>"
+		// 		)
+		// };
+		// $("#checkAnswers").append(
+		// 	"<br>"+
+		// 	"<button class='button' id='confirm'>Looks Good!</button><button class='button' id='restart'>Nah, let me change that</button>"
+		// )
+	},
+
+	render: function(){
+		console.log('rendering');
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);
@@ -177,12 +201,12 @@ var TallyAnswers = Backbone.View.extend({
 		$("#checkAnswers").append(
 			"<br>"+
 			"<button class='button' id='confirm'>Looks Good!</button><button class='button' id='restart'>Nah, let me change that</button>"
-		)
+		)		
 	},
 
 	beginAgain: function(){
 		this.answers.splice(0, this.answers.length);
 		$("#checkAnswers").remove();
-		var questions = new Questions(this.ourName)
+		var questions = new Questions({name: this.ourName})
 	}
 })

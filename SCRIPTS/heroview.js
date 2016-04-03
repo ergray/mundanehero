@@ -65,8 +65,6 @@ var CatchName = Backbone.View.extend({
 
 	makeProfile: function(e){
 		e.preventDefault();
-		console.log('making profiles');
-		// startProfile();
 		var questions = new Questions({name: $("#myName").val()})
 	}
 })
@@ -75,7 +73,6 @@ var Questions = Backbone.View.extend({
 
 
 	initialize: function(options){
-		console.log(this.answers);
 		this.options = options;
 		this.ourName = options.name;
 		this.render(options.name);
@@ -84,7 +81,6 @@ var Questions = Backbone.View.extend({
 	render: function(name){
 		this.questionCount = 1;
 		this.answers = [];
-		console.log(name);
 		$("#nameSpace").remove();
 		$("#initial #subheader").show();
 		$("#initial").append(
@@ -99,7 +95,6 @@ var Questions = Backbone.View.extend({
 			);
 		$("#initial #header").text("Question for you, " +name+ ".");
 		$("#initial #subheader").text("Are you male or female?");
-		console.log('here is question count ' + this.questionCount);
 		var questionButtons = new QuestionButtons({el: $('#initial'), name: name, answers: this.answers, questionCount: this.questionCount})
 	}
 })
@@ -133,9 +128,6 @@ var QuestionButtons = Backbone.View.extend({
 
 	nextPlease: function(e){
 		e.preventDefault;
-		console.log(this.listOfQuestions.length);
-		console.log(this.questionCount);
-		console.log('next Pleasing');
 		this.answers.push($(e.target)[0].innerHTML);
 		if (this.questionCount >= this.listOfQuestions.length){
 			this.questionCount = 1;
@@ -159,34 +151,16 @@ var TallyAnswers = Backbone.View.extend({
 	},
 
 	initialize: function(options){
-		console.log(options);
 		this.ourName = options.ourName;
 		this.answers = options.answers;
 		this.listOfQuestions = options.listOfQuestions;
 		$("#initial #header").text("Thank you, " +this.ourName+ ".");
 		$("#initial #subheader").text('Can you please verify that the below are correct?');
 		$("#answersContainer").remove();
-		console.log('Initialize from TallyAnswers');
 		this.render();
-		// $("#initial").append(
-		// 	"<div id='checkAnswers'></div>"
-		// 	);
-		// for (i = 0; i<this.listOfQuestions.length; i++){
-		// 	$("#checkAnswers").append(
-		// 			"<div class='question'>"+
-		// 			"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
-		// 			"<p><span class='bold'>Answer:</span> "+this.answers[i]+"</p>"+
-		// 			"</div>"
-		// 		)
-		// };
-		// $("#checkAnswers").append(
-		// 	"<br>"+
-		// 	"<button class='button' id='confirm'>Looks Good!</button><button class='button' id='restart'>Nah, let me change that</button>"
-		// )
 	},
 
 	render: function(){
-		console.log('rendering');
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);
@@ -196,7 +170,7 @@ var TallyAnswers = Backbone.View.extend({
 					"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
 					"<p><span class='bold'>Answer:</span> "+this.answers[i]+"</p>"+
 					"</div>"
-				)
+			)
 		};
 		$("#checkAnswers").append(
 			"<br>"+
@@ -207,6 +181,7 @@ var TallyAnswers = Backbone.View.extend({
 	beginAgain: function(){
 		this.answers.splice(0, this.answers.length);
 		$("#checkAnswers").remove();
-		var questions = new Questions({name: this.ourName})
+		var questions = new Questions({name: this.ourName});
+		this.undelegateEvents();
 	}
 })

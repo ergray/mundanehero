@@ -147,7 +147,10 @@ var TallyAnswers = Backbone.View.extend({
 
 	events: {
 		'click #confirm' : "nextPhase",
-		'click #restart' : "beginAgain"
+		'click #restart' : "beginAgain",
+		'click #yesName' : "rightNameGo",
+		'click #noName' : "wrongNameGo",
+		'submit' : "newNameGranted"
 	},
 
 	initialize: function(options){
@@ -179,9 +182,41 @@ var TallyAnswers = Backbone.View.extend({
 	},
 
 	beginAgain: function(){
+		$("#checkAnswers").hide();
+		$("#initial").append(
+			"<div id='nameRightContainer'>"+
+				'<p>OK, let\'s change this up then. Is ' +this.ourName+ ' the right name?</p><br>'+
+				"<button id='yesName'>Yep!</button><button id='noName'>Nope!</button>"+
+			"</div>"
+			);
+	},
+
+	rightNameGo: function(){
 		this.answers.splice(0, this.answers.length);
 		$("#checkAnswers").remove();
-		var questions = new Questions({name: this.ourName});
-		this.undelegateEvents();
+		$("#nameRightContainer").remove();
+		var questions = new Questions({name: this.ourName});	
+		this.undelegateEvents();	
+	},
+
+	wrongNameGo: function(){
+		$("#nameRightContainer").remove();
+		$("#initial").append(
+			"<div id='correctYourNameContainer'>"+
+				"<form>"+
+					"<p>Please state your name: <input type='text' id='newName' required></p>"+
+					"<input class='button' type='submit' id='giveName' value='That&#39;s Me'>"+
+				"</form>"+
+			"</div>"
+			)
+	},
+
+	newNameGranted: function(e){
+		e.preventDefault();
+		this.answers.splice(0, this.answers.length);
+		$("#checkAnswers").remove();
+		var questions = new Questions({name: $("#newName").val()});
+		$("#correctYourNameContainer").remove();
+		this.undelegateEvents();		
 	}
 })

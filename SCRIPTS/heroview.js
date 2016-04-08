@@ -6,6 +6,7 @@
 	initialize: function(opts){
 		el = opts.el;
 		this.collection = new app.PlayerList();
+		console.log(this.collection.model);
 		// console.log(app.playerList.model);
 		this.render();
 	},
@@ -88,7 +89,7 @@ app.Questions = Backbone.View.extend({
 	},
 
 	render: function(name){
-		this.questionCount = 1;
+		this.questionCount = 0;
 		this.answers = [];
 		$("#nameSpace").remove();
 		$("#initial #subheader").show();
@@ -113,18 +114,19 @@ app.QuestionButtons = Backbone.View.extend({
 
 
 	initialize: function(options){
+		this.stats = [];
 		this.options = options;
 		this.collection = options.collection;
 		this.ourName = options.name;
 		this.answers = options.answers;
 		this.questionCount = options.questionCount;
 		this.listOfQuestions = [
-			[{Question : "Are you male or female?"},{AnswerOne : "Male"},{AnswerTwo : "Female" }],
-			[{Question : "A speeding bus is coming at you! Do you:"},{AnswerOne : "Stand still and take it!"},{AnswerTwo : "Dodge out of the way!" }],
-			[{Question : "Your office is calling!"},{AnswerOne : "Pick up the phone..."},{AnswerTwo : "I have bigger concerns!" }],
-			[{Question : "Are you straight or gay?"},{AnswerOne : "Straight"},{AnswerTwo : "Gay" }],
-			[{Question : "Are we alone?"},{AnswerOne : "It\'s a cold, silent universe."},{AnswerTwo : "Something is out there, waiting." }],
-			[{Question : "The last issue of Super Amazo is sold out everywhere!"},{AnswerOne : "Eh, I\'ll just sprint over to the next state and get one there."},{AnswerTwo : "Who gives a shit about comics?" }]
+			[{Question : "Are you male or female?"},{AnswerOne : "Male", public_opinion: 1},{AnswerTwo : "Female", public_opinion: 0}],
+			[{Question : "A speeding bus is coming at you! Do you:"},{AnswerOne : "Stand still and take it!", power: 1},{AnswerTwo : "Dodge out of the way!", power: 1}],
+			[{Question : "Your office is calling!"},{AnswerOne : "Pick up the phone...", sanity: -1},{AnswerTwo : "I have bigger concerns!", responsibility: 1}],
+			[{Question : "Are you straight or gay?"},{AnswerOne : "Straight", public_opinion: 1},{AnswerTwo : "Gay", public_opinion: 0}],
+			[{Question : "Are we alone?"},{AnswerOne : "It\'s a cold, silent universe.", spirituality: -1},{AnswerTwo : "Something is out there, waiting.", intellect: 1}],
+			[{Question : "The last issue of Super Amazo is sold out everywhere!"},{AnswerOne : "Eh, I\'ll just sprint over to the next state and get one there.", responsibility: -1},{AnswerTwo : "Who gives a shit about comics?", wealth: 1}]
 		];
 	},
 
@@ -133,23 +135,40 @@ app.QuestionButtons = Backbone.View.extend({
 	},
 
 	events: {
-		"click .answers" : "nextPlease"
+		"click #answer1" : "gimmeOne",
+		"click #answer2" : "gimmeTwo"
 	},
 
-	nextPlease: function(e){
+	gimmeOne: function(e){
 		e.preventDefault;
-		this.answers.push($(e.target)[0].innerHTML);
-		if (this.questionCount >= this.listOfQuestions.length){
-			this.questionCount = 1;
+		console.log(e.target);
+		this.answers.push(this.listOfQuestions[this.questionCount][1].AnswerOne);
+		if (this.questionCount >= this.listOfQuestions.length-1){
+			this.questionCount = 0;
 			var tallyAnswers = new app.TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName, collection: this.collection});
 			this.undelegateEvents();
 			return
 		};
-		// console.log($(e.target)[0].innerHTML);
+		this.questionCount+=1;
 		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
 		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
 		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
+	},
+
+	gimmeTwo: function(e){
+		e.preventDefault;
+		console.log(e.target);
+		this.answers.push(this.listOfQuestions[this.questionCount][2].AnswerTwo);
+		if (this.questionCount >= this.listOfQuestions.length-1){
+			this.questionCount = 0;
+			var tallyAnswers = new app.TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName, collection: this.collection});
+			this.undelegateEvents();
+			return
+		};
 		this.questionCount+=1;
+		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
+		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
+		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
 	}
 })
 
@@ -165,6 +184,7 @@ app.TallyAnswers = Backbone.View.extend({
 
 	initialize: function(options){
 		this.collection = options.collection;
+		console.log(this.collection.model);
 		this.ourName = options.ourName;
 		this.answers = options.answers;
 		this.listOfQuestions = options.listOfQuestions;
@@ -234,6 +254,7 @@ app.TallyAnswers = Backbone.View.extend({
 	nextPhase: function(){
 		var newGuy = {name: this.ourName};
 		this.collection.add(newGuy);
+		// this.collection.create(newGuy);
 		console.log(this.collection);
 	}
 })

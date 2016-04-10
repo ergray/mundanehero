@@ -121,27 +121,14 @@ app.QuestionButtons = Backbone.View.extend({
 		this.answers = options.answers;
 		this.questionCount = options.questionCount;
 		this.listOfQuestions = [
-			[{id: 0, Question : "Are you male or female?"}],//,{AnswerOne : "Male", public_opinion: 1},{AnswerTwo : "Female", public_opinion: 0}],
-			[{id: 1, Question : "A speeding bus is coming at you! Do you:"}],//,{AnswerOne : "Stand still and take it!", power: 1},{AnswerTwo : "Dodge out of the way!", power: 1}],
-			[{id: 2, Question : "Your office is calling!"}],//,{AnswerOne : "Pick up the phone...", sanity: -1},{AnswerTwo : "I have bigger concerns!", responsibility: 1}],
-			[{id: 3, Question : "Are you straight or gay?"}],//,{AnswerOne : "Straight", public_opinion: 1},{AnswerTwo : "Gay", public_opinion: 0}],
-			[{id: 4, Question : "Are we alone?"}],//,{AnswerOne : "It\'s a cold, silent universe.", spirituality: -1},{AnswerTwo : "Something is out there, waiting.", intellect: 1}],
-			[{id: 5, Question : "The last issue of Super Amazo is sold out everywhere!"}]//{AnswerOne : "Eh, I\'ll just sprint over to the next state and get one there.", responsibility: -1},{AnswerTwo : "Who gives a shit about comics?", wealth: 1}]
-		];
-		this.listOfAnswers = [
-			{relatedQuestionId: "0a", AnswerOne : "Male", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "0b", AnswerTwo : "Female", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "1a", AnswerOne : "Stand still and take it!", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "1b", AnswerTwo : "Dodge out of the way!", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "2a", AnswerOne : "Pick up the phone...", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "2b", AnswerTwo : "I have bigger concerns!", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "3a", AnswerOne : "Straight", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "3b", AnswerTwo : "Gay", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "4a", AnswerOne : "It\'s a cold, silent universe.", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "4b", AnswerTwo : "Something is out there, waiting.", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "5a", AnswerOne : "The last issue of Super Amazo is sold out everywhere!", affectedStatID: "", affectValue: 0},
-			{relatedQuestionId: "5b", AnswerTwo : "Eh, I\'ll just sprint over to the next state and get one there.", affectedStatID: "", affectValue: 0}
+			[{Question : "Are you male or female?"},{AnswerOne : ["Male", "public_opinion", 1]},{AnswerTwo : ["Female", "public_opinion", 0]}],
+			[{Question : "A speeding bus is coming at you! Do you:"},{AnswerOne : ["Stand still and take it!", "power", 1]},{AnswerTwo : ["Dodge out of the way!", "power", 1]}],
+			[{Question : "Your office is calling!"},{AnswerOne : ["Pick up the phone...", "sanity", -1]},{AnswerTwo : ["I have bigger concerns!", "responsibility", 1]}],
+			[{Question : "Are you straight or gay?"},{AnswerOne : ["Straight", "public_opinion", 1]},{AnswerTwo : ["Gay", "public_opinion", 0]}],
+			[{Question : "Are we alone?"},{AnswerOne : ["It\'s a cold, silent universe.", "spirituality", -1]},{AnswerTwo : ["Something is out there, waiting.", "intellect", 1]}],
+			[{Question : "The last issue of Super Amazo is sold out everywhere!"},{AnswerOne : ["Eh, I\'ll just sprint over to the next state and get one there.", "responsibility", -1]},{AnswerTwo : ["Who gives a shit about comics?", "wealth", 1]}]
 		]
+
 	},
 
 	render: function(){
@@ -149,41 +136,28 @@ app.QuestionButtons = Backbone.View.extend({
 	},
 
 	events: {
-		"click #answer1" : "gimmeOne",
-		"click #answer2" : "gimmeTwo"
+		"click #answer1" : "nextPlease",
+		"click #answer2" : "nextPlease"
 	},
 
-	gimmeOne: function(e){
-		e.preventDefault;
-		var targetId = this.questionCount+'a';
-		this.answers.push($.grep(this.listOfAnswers, function(e){return e.relatedQuestionId == targetId}));
-		if (this.questionCount >= this.listOfQuestions.length-1){
+	nextPlease: function(e){
+		if (e.target.id == "answer1"){
+			this.answers.push(this.listOfQuestions[this.questionCount][1].AnswerOne);
+		} else {
+			this.answers.push(this.listOfQuestions[this.questionCount][2].AnswerTwo);
+		}
+		this.questionCount+=1;
+		if (this.questionCount > this.listOfQuestions.length-1){
 			this.questionCount = 0;
 			var tallyAnswers = new app.TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName, collection: this.collection});
 			this.undelegateEvents();
 			return
 		};
-		this.questionCount+=1;
 		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
-		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
-		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
-	},
-
-	gimmeTwo: function(e){
-		e.preventDefault;
-		console.log(e.target);
-		this.answers.push(this.listOfQuestions[this.questionCount][2].AnswerTwo);
-		if (this.questionCount >= this.listOfQuestions.length-1){
-			this.questionCount = 0;
-			var tallyAnswers = new app.TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName, collection: this.collection});
-			this.undelegateEvents();
-			return
-		};
-		this.questionCount+=1;
-		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
-		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne);
-		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo);
+		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne[0]);
+		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo[0]);
 	}
+
 })
 
 app.TallyAnswers = Backbone.View.extend({
@@ -266,9 +240,13 @@ app.TallyAnswers = Backbone.View.extend({
 	},
 
 	nextPhase: function(){
-		var newGuy = {name: this.ourName};
+		var newGuy = new app.Player({name: this.ourName});
 		this.collection.add(newGuy);
-		// this.collection.create(newGuy);
+		for (i=0;i<this.answers.length;i++){
+			var standIn = newGuy.get(this.answers[i][1])
+			newGuy.set(this.answers[i][1], (standIn += (this.answers[i][2])))
+		}
 		console.log(this.collection);
+		console.log(this.collection.where({name: this.ourName}))
 	}
 })

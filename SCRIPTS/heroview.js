@@ -190,7 +190,7 @@ app.TallyAnswers = Backbone.View.extend({
 			$("#checkAnswers").append(
 					"<div class='question'>"+
 					"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
-					"<p><span class='bold'>Answer:</span> "+this.answers[i]+"</p>"+
+					"<p><span class='bold'>Answer:</span> "+this.answers[i][0]+"</p>"+
 					"</div>"
 			)
 		};

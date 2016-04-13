@@ -197,7 +197,7 @@ app.TallyAnswers = Backbone.View.extend({
 		$("#checkAnswers").append(
 			"<br>"+
 			"<button class='button' id='confirm'>Looks Good!</button><button class='button' id='restart'>Nah, let me change that</button>"
-		)		
+		)
 	},
 
 	beginAgain: function(){
@@ -214,8 +214,8 @@ app.TallyAnswers = Backbone.View.extend({
 		this.answers.splice(0, this.answers.length);
 		$("#checkAnswers").remove();
 		$("#nameRightContainer").remove();
-		var questions = new app.Questions({name: this.ourName, collection: this.collection});	
-		this.undelegateEvents();	
+		var questions = new app.Questions({name: this.ourName, collection: this.collection});
+		this.undelegateEvents();
 	},
 
 	wrongNameGo: function(){
@@ -236,7 +236,7 @@ app.TallyAnswers = Backbone.View.extend({
 		$("#checkAnswers").remove();
 		var questions = new app.Questions({name: $("#newName").val(), collection: this.collection});
 		$("#correctYourNameContainer").remove();
-		this.undelegateEvents();		
+		this.undelegateEvents();
 	},
 
 	nextPhase: function(){

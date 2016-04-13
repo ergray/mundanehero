@@ -27,7 +27,6 @@ gulp.task('sass', function() {
         .pipe(sass())
         .pipe(concat('superhero.css'))
         .pipe(autoprefixer('last 2 versions'))
-        .pipe(gulp.dest('STYLES'))
         .pipe(gulp.dest('dist/STYLES'))
         .pipe(notify({ message: 'Style task complete' }))
         .pipe(browserSync.stream());

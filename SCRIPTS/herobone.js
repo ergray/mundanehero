@@ -21,3 +21,19 @@ app.Player = Backbone.Model.extend({
 app.PlayerList = Backbone.Collection.extend({
 	model: app.Player,
 })
+
+app.Choices = Backbone.Model.extend({
+	question: null,
+	choice1: null,
+	choice2: null
+})
+
+
+app.ChooseChoices = Backbone.Collection.extend({
+	model: app.Choices,
+	url: "http://www.htmlsouls.com/SuperheroCYOA/SCRIPTS/hero.json",
+	initialize: function(){
+		
+	}
+
+})

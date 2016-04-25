@@ -1,7 +1,7 @@
  var app = {};
 
 // var Begin = Backbone.View.extend({
-	app.Begin = Backbone.View.extend({
+app.Begin = Backbone.View.extend({
 
 	initialize: function(opts){
 		el = opts.el;
@@ -172,7 +172,7 @@ app.TallyAnswers = Backbone.View.extend({
 
 	initialize: function(options){
 		this.collection = options.collection;
-		console.log(this.collection.model);
+		console.log(this.collection);
 		this.ourName = options.ourName;
 		this.answers = options.answers;
 		this.listOfQuestions = options.listOfQuestions;
@@ -248,5 +248,18 @@ app.TallyAnswers = Backbone.View.extend({
 		}
 		console.log(this.collection);
 		console.log(this.collection.where({name: this.ourName}))
+		var startGame = new app.StartGame({el: $("#initial"), character: newGuy.get("name"), collection: this.collection})
 	}
+
+
 })
+
+app.StartGame = Backbone.View.extend({
+ 	initialize: function(options){
+ 		console.log(options);
+ 		$("#initial").children().remove();
+ 		this.character = options.character;
+ 		this.collection = options.collection;
+ 		console.log(this.character)
+ 	}
+ })

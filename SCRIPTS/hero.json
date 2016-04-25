@@ -1,3 +1,7 @@
 {
-	
+	{	
+		"question": "",
+		"choice1": ["question","result1","result2"],
+		"choice2": ["question","result1","result2"],
+	},	
 }

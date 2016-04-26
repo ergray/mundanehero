@@ -1,7 +1,13 @@
-{
+[
 	{	
-		"question": "",
-		"choice1": ["question","result1","result2"],
-		"choice2": ["question","result1","result2"],
-	},	
-}
+		"question": "It is early. 5am, but you can hear the traffic moving through the streets. Workers on their way to their jobs, parents getting their children ready. It is a twilight period and your favorite time of the day. Waking is painful but this first hour is at least relaxing. Nothing to worry about typically, no problems to solve. Just get up, take a shower and get dressed and try not to think about what awaits you.",
+		"choice1": ["Take a shower and get dressed",2],
+		"choice2": ["Go back to bed",3]
+	},
+	{
+		"question": "You feel prepared. The early sun is rising and peering in through your windows. Work is a quick jog away. You feed your cat, pack your daily bag, and head off. Halfway to work you encounter an accident: a car is flipped over, its driver crunched and stuck in their seat. Their arm is reaching out of the window, grasping, but unable to free themselves. There is a large group of of witnesses, some on their phones and some just taking photos.",
+		"choice1": ["Use your powers to help free the driver", 4],
+		"choice2": ["Probably the police will be here soon to help",5]
+	}
+]
+

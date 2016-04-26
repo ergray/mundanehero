@@ -4,5 +4,6 @@ $(document).ready(function(){
 	// console.log(playerList);
 	var chooseChoices = new app.ChooseChoices();
 	chooseChoices.fetch();
+	console.log(app.ChooseChoices);
 	console.log(chooseChoices);
 })

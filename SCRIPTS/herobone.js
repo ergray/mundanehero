@@ -31,7 +31,7 @@ app.Choices = Backbone.Model.extend({
 
 app.ChooseChoices = Backbone.Collection.extend({
 	model: app.Choices,
-	url: "http://www.htmlsouls.com/SuperheroCYOA/SCRIPTS/hero.json",
+	url: "./SCRIPTS/hero.json",
 	initialize: function(){
 		
 	}

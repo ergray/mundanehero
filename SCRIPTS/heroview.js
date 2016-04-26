@@ -259,7 +259,28 @@ app.StartGame = Backbone.View.extend({
  		console.log(options);
  		$("#initial").children().remove();
  		this.character = options.character;
- 		this.collection = options.collection;
+ 		// this.collection = options.collection;
+		this.collection = new app.ChooseChoices();
+		this.collection.fetch({
+			success: this.onSuccess,
+			error: this.onError
+		});
+		console.log(this.collection);
  		console.log(this.character)
- 	}
+ 	},
+
+	onSuccess: function(collection, response, options){
+			// for (i = 0; i < collection.models.length; i++)
+			// $('.employees').append('<option value='+collection.at(i).attributes._id+'>'
+			// 	+collection.at(i).attributes.lastName+', '+collection.at(i).attributes.firstName + '</option>');
+			// },
+			console.log("Success!")
+		},
+
+	onError: function(collection, response, options){
+				console.log("I failed.");
+				console.log(response);
+			},
+
+
  })

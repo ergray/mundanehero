@@ -10,7 +10,7 @@ var concat = require('gulp-concat');
 var notify = require('gulp-notify');
 
 // Static Server + watching scss/html files. Serves files from the /dist folder
-gulp.task('serve', ['sass', 'scripts', 'assets', 'templates'], function() {
+gulp.task('serve', ['sass', 'scripts', 'assets', 'templates', 'data'], function() {
 
     browserSync.init({
         server: './dist'
@@ -18,6 +18,7 @@ gulp.task('serve', ['sass', 'scripts', 'assets', 'templates'], function() {
 
     gulp.watch('STYLES/SASS/**/*.scss', ['sass']);
     gulp.watch('SCRIPTS/*.js', ['scripts']);
+    gulp.watch('SCRIPTS/*.json', ['data']);
     gulp.watch('*.html', ['templates']);
 });
 
@@ -36,6 +37,13 @@ gulp.task('scripts', function() {
   return gulp.src('SCRIPTS/*.js')
     .pipe(gulp.dest('dist/SCRIPTS'))
     .pipe(notify({ message: 'Scripts task complete' }))
+    .pipe(browserSync.stream());
+});
+
+gulp.task('data', function() {
+  return gulp.src('SCRIPTS/*.json')
+    .pipe(gulp.dest('dist/SCRIPTS'))
+    .pipe(notify({ message: 'Data task complete' }))
     .pipe(browserSync.stream());
 });
 

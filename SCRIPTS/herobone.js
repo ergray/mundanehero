@@ -24,6 +24,7 @@ app.PlayerList = Backbone.Collection.extend({
 
 app.Choices = Backbone.Model.extend({
 	defaults: {
+		"id" : null,
 		"question": null,
 		"choice1": null,
 		"choice2": null

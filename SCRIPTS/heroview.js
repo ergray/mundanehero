@@ -255,9 +255,16 @@ app.TallyAnswers = Backbone.View.extend({
 })
 
 app.StartGame = Backbone.View.extend({
+
+	events: {
+		"click #answer1" : "nextPlease",
+		"click #answer2" : "nextPlease"
+	},
+
+
  	initialize: function(options){
  		console.log(options);
- 		$("#initial").children().remove();
+ 		$("#initial div:nth-child(2)").remove();
  		this.character = options.character;
  		// this.collection = options.collection;
 		this.collection = new app.ChooseChoices();
@@ -265,22 +272,61 @@ app.StartGame = Backbone.View.extend({
 			success: this.onSuccess,
 			error: this.onError
 		});
+		this.placeholder = 0;
 		console.log(this.collection);
- 		console.log(this.character)
+ 		console.log(this.character);
  	},
 
 	onSuccess: function(collection, response, options){
-			// for (i = 0; i < collection.models.length; i++)
-			// $('.employees').append('<option value='+collection.at(i).attributes._id+'>'
-			// 	+collection.at(i).attributes.lastName+', '+collection.at(i).attributes.firstName + '</option>');
-			// },
-			console.log("Success!")
+		console.log(collection.at(0).get("question"));
+		$("#welcome").text(
+			collection.at(0).get("question")
+			);
+		$("#initial").append(
+			"<div id='answersContainer'>"+
+			"<div id='a1Container'>"+
+			"<div class='answers'><p id='answer1'>"+collection.at(0).get("choice1")[0]+"</p></div>"+
+			"</div>"+
+			"<div id='a2Container'>"+
+			"<div class='answers'><p id='answer2'>"+collection.at(0).get("choice2")[0]+"</p></div>"+
+			"</div>"+
+			"</div>"
+			);
+		console.log("Success!")
 		},
 
 	onError: function(collection, response, options){
-				console.log("I failed.");
-				console.log(response);
-			},
+			console.log("I failed.");
+			console.log(response);
+		},
 
+
+	nextPlease: function(e){
+		if (e.target.id == "answer1"){
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("question")
+				);
+			var newPlace = this.collection.at(this.placeholder).get("choice1")[1];
+			$("#answer1").text(
+				this.collection.at(newPlace).get("choice1")[0]
+				);
+			$("#answer2").text(
+				this.collection.at(newPlace).get("choice2")[0]
+				);
+			this.placeholder = newPlace
+		} else if (e.target.id == "answer2"){
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("question")
+				);
+			var newPlace = this.collection.at(this.placeholder).get("choice2")[1];
+			$("#answer1").text(
+				this.collection.at(newPlace).get("choice1")[0]
+				);
+			$("#answer2").text(
+				this.collection.at(newPlace).get("choice2")[0]
+				);
+			this.placeholder = newPlace
+		}
+	}
 
  })

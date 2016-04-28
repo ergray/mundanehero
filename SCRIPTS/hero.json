@@ -1,13 +1,27 @@
 [
 	{	
+		"id" : 0,
 		"question": "It is early. 5am, but you can hear the traffic moving through the streets. Workers on their way to their jobs, parents getting their children ready. It is a twilight period and your favorite time of the day. Waking is painful but this first hour is at least relaxing. Nothing to worry about typically, no problems to solve. Just get up, take a shower and get dressed and try not to think about what awaits you.",
-		"choice1": ["Take a shower and get dressed",2],
-		"choice2": ["Go back to bed",3]
+		"choice1": ["Take a shower and get dressed",1],
+		"choice2": ["Go back to bed",2]
 	},
-	{
+	{	
+		"id" : 1,
 		"question": "You feel prepared. The early sun is rising and peering in through your windows. Work is a quick jog away. You feed your cat, pack your daily bag, and head off. Halfway to work you encounter an accident: a car is flipped over, its driver crunched and stuck in their seat. Their arm is reaching out of the window, grasping, but unable to free themselves. There is a large group of of witnesses, some on their phones and some just taking photos.",
-		"choice1": ["Use your powers to help free the driver", 4],
-		"choice2": ["Probably the police will be here soon to help",5]
+		"choice1": ["Use your powers to help free the driver", 3],
+		"choice2": ["Probably the police will be here soon to help",4]
+	},
+	{	
+		"id" : 2,
+		"question": "But your bed is too comfortable. Or, if you are going to be honest with yourself, simply safer. Beyond these sheets are things you'd rather pretend didn't exist. What is thirty seconds or thirty minutes more of warm ignorance? When your eyes open next daylight has filled your room and it is almost seven. In a flurry you whip about your apartment not bothering to shower. On your sprint to work you notice a car accident. A tow truck is taking away a demolished car and an ambulance is rolling away a body. Could you have done something? It is difficult to say. You're past your prime and anyway who could say how long ago they'd expired?",
+		"choice1": ["Carry on to work",5],
+		"choice2": ["Maybe it's not too late to call out, dedicate the day to your 'other' job",6]
+	},
+	{	
+		"id" : 3,
+		"question": "Although you're a bit worried about the amount of people nearby, you manage to find a dumpster to jump behind and change into your outfit. You stash your suitcase and run up to accident. There are a few calls at you 'Hey [superheroname]!', and a few more that you pick up asking who you are and 'Where's [more popular superhero]'. It takes a bit more effort than you would expect but you manage to pry off the door of the car and carefully you extract the person from the vehicle. They seem a bit cut up and shaken, but their breathing is steady. The crowd presses in upon you.",
+		"choice1": ["Stick around and chat with the crowd a bit",8],
+		"choice2": ["Grab your suitcase and get out of there",9]
 	}
 ]
 

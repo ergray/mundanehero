@@ -1,6 +1,5 @@
  var app = {};
 
-// var Begin = Backbone.View.extend({
 app.Begin = Backbone.View.extend({
 
 	initialize: function(opts){
@@ -258,7 +257,8 @@ app.StartGame = Backbone.View.extend({
 
 	events: {
 		"click #answer1" : "nextPlease",
-		"click #answer2" : "nextPlease"
+		"click #answer2" : "nextPlease",
+		"click #startOver" : "newGame"
 	},
 
 
@@ -292,7 +292,6 @@ app.StartGame = Backbone.View.extend({
 			"</div>"+
 			"</div>"
 			);
-		console.log("Success!")
 		},
 
 	onError: function(collection, response, options){
@@ -302,7 +301,22 @@ app.StartGame = Backbone.View.extend({
 
 
 	nextPlease: function(e){
+		console.log(this.collection.at(this.placeholder).get("ending"));
 		if (e.target.id == "answer1"){
+			if (this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending") != null){
+				console.log('success');
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending")
+				);
+			$("#a1Container").remove();
+			$("#a2Container").remove();
+			$("#initial").append(
+				"<div id='startOver'>"+
+				"<p>"+this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("startOver")+"</p>"+
+				"</div>"
+				); 	
+				return;			
+ 			}
 			$("#welcome").text(
 				this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("question")
 				);
@@ -313,8 +327,23 @@ app.StartGame = Backbone.View.extend({
 			$("#answer2").text(
 				this.collection.at(newPlace).get("choice2")[0]
 				);
-			this.placeholder = newPlace
+			this.placeholder = newPlace;
+			return
 		} else if (e.target.id == "answer2"){
+			if (this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("ending") != null){
+				console.log('success');
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("ending")
+				);
+			$("#a1Container").remove();
+			$("#a2Container").remove();
+			$("#initial").append(
+				"<div id='startOver'>"+
+				"<p>"+this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("startOver")+"</p>"+
+				"</div>"
+				); 	  	
+				return;			
+ 			}	
 			$("#welcome").text(
 				this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("question")
 				);
@@ -325,8 +354,13 @@ app.StartGame = Backbone.View.extend({
 			$("#answer2").text(
 				this.collection.at(newPlace).get("choice2")[0]
 				);
-			this.placeholder = newPlace
+			this.placeholder = newPlace;
+			return
 		}
+	},
+
+	newGame: function(){
+		console.log('coming soon');
 	}
 
  })

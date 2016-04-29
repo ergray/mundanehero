@@ -22,6 +22,12 @@
 		"question": "Although you're a bit worried about the amount of people nearby, you manage to find a dumpster to jump behind and change into your outfit. You stash your suitcase and run up to accident. There are a few calls at you 'Hey [superheroname]!', and a few more that you pick up asking who you are and 'Where's [more popular superhero]'. It takes a bit more effort than you would expect but you manage to pry off the door of the car and carefully you extract the person from the vehicle. They seem a bit cut up and shaken, but their breathing is steady. The crowd presses in upon you.",
 		"choice1": ["Stick around and chat with the crowd a bit",8],
 		"choice2": ["Grab your suitcase and get out of there",9]
+	},
+	{
+		"id" : 4,
+		"question": "But the police do not show up in time. Later, at the water cooler, remembering your life ten years ago, Sarah mentions an accident she saw on her way to work. 'It was horrible. A truck flipped over and an ambulance was taking away a body. The body was all cover in a sheet you couldn't see anything. What a terrible way to start my day!' You crumple your water cup without thinking about it, water spilling onto the floor. Sarah doesn't say anything, just walks away.",
+		"ending" : "The rest of your life is much the same, missing opportunities and thinking about grander times. Maybe next time will go better?",
+		"startOver" : "Try again?"
 	}
 ]
 

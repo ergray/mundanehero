@@ -321,8 +321,8 @@ app.StartGame = Backbone.View.extend({
 
 	helpContinue: function(val1){
 		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
-		if (this.character.get("public_opinion") >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[1]){
-			console.log('secret path should show');
+		if ( (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat") != null) && 
+			(this.character.get(this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[0]) >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[1])){
 			$("#answersContainer").append(
 				"<div id='secretToEveryone'>"+
 				"<p>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[2]+"</p>"+

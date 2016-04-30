@@ -9,7 +9,8 @@
 		"id" : 1,
 		"question": "You feel prepared. The early sun is rising and peering in through your windows. Work is a quick jog away. You feed your cat, pack your daily bag, and head off. Halfway to work you encounter an accident: a car is flipped over, its driver crunched and stuck in their seat. Their arm is reaching out of the window, grasping, but unable to free themselves. There is a large group of of witnesses, some on their phones and some just taking photos.",
 		"choice1": ["Use your powers to help free the driver", 3],
-		"choice2": ["Probably the police will be here soon to help",4]
+		"choice2": ["Probably the police will be here soon to help",4],
+		"secretStat" : ["public_opinon", 1, "Test secret option!"]
 	},
 	{	
 		"id" : 2,

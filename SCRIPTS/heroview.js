@@ -245,7 +245,10 @@ app.TallyAnswers = Backbone.View.extend({
 		}
 		console.log(this.collection);
 		console.log(this.collection.where({name: this.ourName}))
-		var startGame = new app.StartGame({el: $("#initial"), character: newGuy.get("name"), collection: this.collection})
+
+		//ToDo: Figure out what to do with this collection. Do I need it?
+		
+		var startGame = new app.StartGame({el: $("#initial"), character: /*newGuy.get("name")*/newGuy, collection: this.collection})
 	}
 
 
@@ -318,6 +321,14 @@ app.StartGame = Backbone.View.extend({
 
 	helpContinue: function(val1){
 		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
+		if (this.character.get("public_opinion") >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[1]){
+			console.log('secret path should show');
+			$("#answersContainer").append(
+				"<div id='secretToEveryone'>"+
+				"<p>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[2]+"</p>"+
+				"</div>"
+				)
+		}
 		return (
 			$("#welcome").text(
 				this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")

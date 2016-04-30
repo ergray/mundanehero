@@ -25,9 +25,8 @@
 	},
 	{
 		"id" : 4,
-		"question": "But the police do not show up in time. Later, at the water cooler, remembering your life ten years ago, Sarah mentions an accident she saw on her way to work. 'It was horrible. A truck flipped over and an ambulance was taking away a body. The body was all cover in a sheet you couldn't see anything. What a terrible way to start my day!' You crumple your water cup without thinking about it, water spilling onto the floor. Sarah doesn't say anything, just walks away.",
-		"ending" : "The rest of your life is much the same, missing opportunities and thinking about grander times. Maybe next time will go better?",
-		"startOver" : "Try again?"
+		"question": "But the police do not show up in time. Later, at the water cooler, while you think about who you used to be, Sarah mentions an accident she saw on her way to work. 'It was horrible. A truck flipped over and an ambulance was taking away a body. The body was all cover in a sheet you couldn't see anything. What a terrible way to start my day!' You crumple your water cup without thinking about it, water spilling onto the floor. Sarah doesn't say anything, just walks away.",
+		"ending" : "The rest of your life is much the same, missing opportunities and thinking about grander times. Maybe next time will go better?"
 	}
 ]
 

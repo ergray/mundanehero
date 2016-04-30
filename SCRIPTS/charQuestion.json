@@ -1,0 +1,38 @@
+[
+	{
+		"id" : 0,
+		"question" : "You can park close to your destination for $10, or you could just walk a couple blocks.",
+		"answerOne" : ["Pay up", "wealth", 1],
+		"answerTwo" : ["Hoof it", "fitness", 1]
+	},
+	{
+		"id" : 1,
+		"question" : "Your roommate hasn't cleaned their dishes in weeks.",
+		"answerOne" : ["Keep cleaning up after them.", "anger", 1],
+		"answerTwo" : ["Confront them.", "leadership", 1]
+	},
+	{
+		"id" : 2,
+		"question" : "It's a pretty nice day outside....",
+		"answerOne" : ["Let's go for a walk.", "fitness", 1],
+		"answerTwo" : ["I still have some television to catch up on", "fitness", -1]
+	},
+	{
+		"id" : 3,
+		"question" : "Your high school reunion is coming up!",
+		"answerOne" : ["Who cares about those chumps?", "anger", 1],
+		"answerTwo" : ["I can't wait to show them how successful I am", "wealth", 1]
+	},
+	{
+		"id" : 4,
+		"question" : "Time for some relaxing beach reading....",
+		"answerOne" : ["Great, I can get to that new James Patterson novel!", "uninteresting", 1],
+		"answerTwo" : ["It's appropriate to read Camus at the beach, right?", "elitist", 1]
+	},
+	{
+		"id" : 5,
+		"question" : "What do you think about superheroes?",
+		"answerOne" : ["Wow, cool!", "worshipper", 1],
+		"answerTwo" : ["Is there a place for a normal person in this world?", "skeptic", 1]
+	}
+]

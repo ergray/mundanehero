@@ -10,7 +10,7 @@
 		"question": "You feel prepared. The early sun is rising and peering in through your windows. Work is a quick jog away. You feed your cat, pack your daily bag, and head off. Halfway to work you encounter an accident: a car is flipped over, its driver crunched and stuck in their seat. Their arm is reaching out of the window, grasping, but unable to free themselves. There is a large group of of witnesses, some on their phones and some just taking photos.",
 		"choice1": ["Use your powers to help free the driver", 3],
 		"choice2": ["Probably the police will be here soon to help",4],
-		"secretStat" : ["public_opinion", 1, "Test secret option!"]
+		"secretStat" : ["filler", 10, "public_opinion", 1]
 	},
 	{	
 		"id" : 2,
@@ -28,6 +28,12 @@
 		"id" : 4,
 		"question": "But the police do not show up in time. Later, at the water cooler, while you think about who you used to be, Sarah mentions an accident she saw on her way to work. 'It was horrible. A truck flipped over and an ambulance was taking away a body. The body was all cover in a sheet you couldn't see anything. What a terrible way to start my day!' You crumple your water cup without thinking about it, water spilling onto the floor. Sarah doesn't say anything, just walks away.",
 		"ending" : "The rest of your life is much the same, missing opportunities and thinking about grander times. Maybe next time will go better?"
+	},
+	{	
+		"id" : 10,
+		"question": "secret path!",
+		"choice1": ["what ya mean",9999],
+		"choice2": ["feel ya",9998]
 	}
 ]
 

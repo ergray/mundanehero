@@ -81,30 +81,46 @@ app.Questions = Backbone.View.extend({
 
 	initialize: function(options){
 		this.options = options;
-		this.collection = options.collection;
+		this.collection = new app.characterQuestions();
 		this.ourName = options.name;
 		this.render(options.name);
 	},
 
 	render: function(name){
+		console.log(this.collection);
+		this.collection.fetch({
+			data: {
+				name: name
+			},
+			success: this.onSuccess,
+			error: this.onError
+		});
 		this.questionCount = 0;
 		this.answers = [];
+		var questionButtons = new app.QuestionButtons({el: $('#initial'), name: name, answers: this.answers, questionCount: this.questionCount, collection: this.collection})
+	},
+
+	onSuccess: function(collection, response, options){
 		$("#nameSpace").remove();
 		$("#initial #subheader").show();
 		$("#initial").append(
 			"<div id='answersContainer'>"+
 			"<div id='a1Container'>"+
-			"<div class='answers'><p id='answer1'>Male</p></div>"+
+			"<div class='answers'><p id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
 			"</div>"+
 			"<div id='a2Container'>"+
-			"<div class='answers'><p id='answer2'>Female</p></div>"+
+			"<div class='answers'><p id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
 			"</div>"+
 			"</div>"
 			);
-		$("#initial #header").text("Question for you, " +name+ ".");
-		$("#initial #subheader").text("Are you male or female?");
-		var questionButtons = new app.QuestionButtons({el: $('#initial'), name: name, answers: this.answers, questionCount: this.questionCount, collection: this.collection})
-	}
+		$("#initial #header").text("Question for you, " +options.data.name+ ".");
+		$("#initial #subheader").text(collection.get(0).get("question"));
+		},
+
+	onError: function(collection, response, options){
+			console.log("I failed.");
+			console.log(response);
+		},
 })
 
 app.QuestionButtons = Backbone.View.extend({
@@ -118,15 +134,6 @@ app.QuestionButtons = Backbone.View.extend({
 		this.ourName = options.name;
 		this.answers = options.answers;
 		this.questionCount = options.questionCount;
-		this.listOfQuestions = [
-			[{Question : "Are you male or female?"},{AnswerOne : ["Male", "public_opinion", 1]},{AnswerTwo : ["Female", "public_opinion", 0]}],
-			[{Question : "A speeding bus is coming at you! Do you:"},{AnswerOne : ["Stand still and take it!", "power", 1]},{AnswerTwo : ["Dodge out of the way!", "power", 1]}],
-			[{Question : "Your office is calling!"},{AnswerOne : ["Pick up the phone...", "sanity", -1]},{AnswerTwo : ["I have bigger concerns!", "responsibility", 1]}],
-			[{Question : "Are you straight or gay?"},{AnswerOne : ["Straight", "public_opinion", 1]},{AnswerTwo : ["Gay", "public_opinion", 0]}],
-			[{Question : "Are we alone?"},{AnswerOne : ["It\'s a cold, silent universe.", "spirituality", -1]},{AnswerTwo : ["Something is out there, waiting.", "intellect", 1]}],
-			[{Question : "The last issue of Super Amazo is sold out everywhere!"},{AnswerOne : ["Eh, I\'ll just sprint over to the next state and get one there.", "responsibility", -1]},{AnswerTwo : ["Who gives a shit about comics?", "wealth", 1]}]
-		]
-
 	},
 
 	render: function(){
@@ -140,20 +147,20 @@ app.QuestionButtons = Backbone.View.extend({
 
 	nextPlease: function(e){
 		if (e.target.id == "answer1"){
-			this.answers.push(this.listOfQuestions[this.questionCount][1].AnswerOne);
+			this.answers.push(this.collection.get(this.questionCount).get("answerOne"));
 		} else {
-			this.answers.push(this.listOfQuestions[this.questionCount][2].AnswerTwo);
+			this.answers.push(this.collection.get(this.questionCount).get("answerTwo"));
 		}
 		this.questionCount+=1;
-		if (this.questionCount > this.listOfQuestions.length-1){
+		if (this.questionCount > this.collection.length-1){
 			this.questionCount = 0;
 			var tallyAnswers = new app.TallyAnswers({el: $('#initial'), answers: this.answers, listOfQuestions: this.listOfQuestions, ourName: this.ourName, collection: this.collection});
 			this.undelegateEvents();
 			return
 		};
-		$("#initial #subheader").text(this.listOfQuestions[this.questionCount][0].Question);
-		$('#answer1').text(this.listOfQuestions[this.questionCount][1].AnswerOne[0]);
-		$('#answer2').text(this.listOfQuestions[this.questionCount][2].AnswerTwo[0]);
+		$("#initial #subheader").text(this.collection.get(this.questionCount).get("question"));
+		$('#answer1').text(this.collection.get(this.questionCount).get("answerOne")[0]);
+		$('#answer2').text(this.collection.get(this.questionCount).get("answerTwo")[0]);
 	}
 
 })
@@ -172,7 +179,6 @@ app.TallyAnswers = Backbone.View.extend({
 		this.collection = options.collection;
 		this.ourName = options.ourName;
 		this.answers = options.answers;
-		this.listOfQuestions = options.listOfQuestions;
 		$("#initial #header").text("Thank you, " +this.ourName+ ".");
 		$("#initial #subheader").text('Can you please verify that the below are correct?');
 		$("#answersContainer").remove();
@@ -183,10 +189,10 @@ app.TallyAnswers = Backbone.View.extend({
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);
-		for (i = 0; i<this.listOfQuestions.length; i++){
+		for (i = 0; i<this.collection.length; i++){
 			$("#checkAnswers").append(
 					"<div class='question'>"+
-					"<p><span class='bold'>Question:</span> "+this.listOfQuestions[i][0].Question+"</p>"+
+					"<p><span class='bold'>Question:</span> "+this.collection.get(i).get("question")+"</p>"+
 					"<p><span class='bold'>Answer:</span> "+this.answers[i][0]+"</p>"+
 					"</div>"
 			)
@@ -237,14 +243,15 @@ app.TallyAnswers = Backbone.View.extend({
 	},
 
 	nextPhase: function(){
+		console.log(this.answers);
 		var newGuy = new app.Player({name: this.ourName});
-		this.collection.add(newGuy);
+		// this.collection.add(newGuy);
 		for (i=0;i<this.answers.length;i++){
 			var standIn = newGuy.get(this.answers[i][1])
 			newGuy.set(this.answers[i][1], (standIn += (this.answers[i][2])))
 		}
-		console.log(this.collection);
-		console.log(this.collection.where({name: this.ourName}))
+		// console.log(this.collection);
+		// console.log(this.collection.where({name: this.ourName}))
 
 		//ToDo: Figure out what to do with this collection. Do I need it?
 		
@@ -259,14 +266,14 @@ app.StartGame = Backbone.View.extend({
 	events: {
 		"click #answer1" : "nextPlease",
 		"click #answer2" : "nextPlease",
-		// "click #a1Container" : "nextPlease",
-		// "click #a2Container" : "nextPlease",
+		"click #secretToEveryone" : "nextPlease",
 		"click #startOver" : "newGame"
 	},
 
 
  	initialize: function(options){
  		this.character = options.character;
+ 		console.log(this.character);
 		this.collection = new app.ChooseChoices();
 		this.render()
  	},
@@ -281,6 +288,7 @@ app.StartGame = Backbone.View.extend({
  	},
 
 	onSuccess: function(collection, response, options){
+		console.log(collection);
 		console.log(collection.at(0).get("question"));
 		$("#welcome").text(
 			collection.at(0).get("question")
@@ -321,11 +329,11 @@ app.StartGame = Backbone.View.extend({
 
 	helpContinue: function(val1){
 		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
-		if ( (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat") != null) && 
-			(this.character.get(this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[0]) >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[1])){
+		if ( (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat") != "none") && 
+			(this.character.get(this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[2]) >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[3])){
 			$("#answersContainer").append(
-				"<div id='secretToEveryone'>"+
-				"<p>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[2]+"</p>"+
+				"<div class='answers'>"+
+				"<p id='secretToEveryone'>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[0]+"</p>"+
 				"</div>"
 				)
 		}
@@ -345,7 +353,6 @@ app.StartGame = Backbone.View.extend({
 
 	nextPlease: function(e){
 		if (e.target.id == "answer1"){
-		// if (e.target.id == "a1Container"){
 			if (this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending") != null){
 				this.helpFill("choice1"); 	
 				return;			
@@ -353,14 +360,20 @@ app.StartGame = Backbone.View.extend({
  			this.helpContinue("choice1");
 			return
 		} else if (e.target.id == "answer2"){
-		// } else if (e.target.id == "a2Container"){
 			if (this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("ending") != null){
 				this.helpFill("choice2"); 	  	
 				return;			
- 			}	
+ 			}
  			this.helpContinue("choice2");
 			return
-		}
+		}	else if (e.target.id == "secretToEveryone"){
+			if (this.collection.at(this.collection.at(this.placeholder).get("secretStat")[1]).get("ending") != null){
+				this.helpFill("secretStat"); 	  	
+				return;			
+ 			}
+ 			this.helpContinue("secretStat");
+			return 			
+ 			}
 	},
 
 	newGame: function(){

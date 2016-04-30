@@ -5,8 +5,7 @@ app.Begin = Backbone.View.extend({
 	initialize: function(opts){
 		el = opts.el;
 		this.collection = new app.PlayerList();
-		console.log(this.collection.model);
-		// console.log(app.playerList.model);
+		//Render front page. Alter text in HTML elements of render function to change messages.
 		this.render();
 	},
 
@@ -171,7 +170,6 @@ app.TallyAnswers = Backbone.View.extend({
 
 	initialize: function(options){
 		this.collection = options.collection;
-		console.log(this.collection);
 		this.ourName = options.ourName;
 		this.answers = options.answers;
 		this.listOfQuestions = options.listOfQuestions;
@@ -258,23 +256,25 @@ app.StartGame = Backbone.View.extend({
 	events: {
 		"click #answer1" : "nextPlease",
 		"click #answer2" : "nextPlease",
+		// "click #a1Container" : "nextPlease",
+		// "click #a2Container" : "nextPlease",
 		"click #startOver" : "newGame"
 	},
 
 
  	initialize: function(options){
- 		console.log(options);
- 		$("#initial div:nth-child(2)").remove();
  		this.character = options.character;
- 		// this.collection = options.collection;
 		this.collection = new app.ChooseChoices();
+		this.render()
+ 	},
+
+ 	render: function(){
+ 		$("#initial div:nth-child(2)").remove();
 		this.collection.fetch({
 			success: this.onSuccess,
 			error: this.onError
 		});
 		this.placeholder = 0;
-		console.log(this.collection);
- 		console.log(this.character);
  	},
 
 	onSuccess: function(collection, response, options){
@@ -299,68 +299,62 @@ app.StartGame = Backbone.View.extend({
 			console.log(response);
 		},
 
+	helpFill: function(val1){
+		return (
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")
+				),
+			$("#a1Container").remove(),
+			$("#a2Container").remove(),
+			$("#initial").append(
+			"<div id='answersContainer'>"+
+				"<div class='answers' id='startOver'>"+
+				"<p id='theEnd'>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("ending")+"</p>"+
+				"</div>"+
+				"</div>"
+				)
+			)
+	},
+
+	helpContinue: function(val1){
+		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
+		return (
+			$("#welcome").text(
+				this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")
+				),
+			$("#answer1").text(
+				this.collection.at(newPlace).get("choice1")[0]
+				),
+			$("#answer2").text(
+				this.collection.at(newPlace).get("choice2")[0]
+				),
+			this.placeholder = newPlace
+			)
+	},
 
 	nextPlease: function(e){
-		console.log(this.collection.at(this.placeholder).get("ending"));
 		if (e.target.id == "answer1"){
+		// if (e.target.id == "a1Container"){
 			if (this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending") != null){
-				console.log('success');
-			$("#welcome").text(
-				this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending")
-				);
-			$("#a1Container").remove();
-			$("#a2Container").remove();
-			$("#initial").append(
-				"<div id='startOver'>"+
-				"<p>"+this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("startOver")+"</p>"+
-				"</div>"
-				); 	
+				this.helpFill("choice1"); 	
 				return;			
  			}
-			$("#welcome").text(
-				this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("question")
-				);
-			var newPlace = this.collection.at(this.placeholder).get("choice1")[1];
-			$("#answer1").text(
-				this.collection.at(newPlace).get("choice1")[0]
-				);
-			$("#answer2").text(
-				this.collection.at(newPlace).get("choice2")[0]
-				);
-			this.placeholder = newPlace;
+ 			this.helpContinue("choice1");
 			return
 		} else if (e.target.id == "answer2"){
+		// } else if (e.target.id == "a2Container"){
 			if (this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("ending") != null){
-				console.log('success');
-			$("#welcome").text(
-				this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("ending")
-				);
-			$("#a1Container").remove();
-			$("#a2Container").remove();
-			$("#initial").append(
-				"<div id='startOver'>"+
-				"<p>"+this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("startOver")+"</p>"+
-				"</div>"
-				); 	  	
+				this.helpFill("choice2"); 	  	
 				return;			
  			}	
-			$("#welcome").text(
-				this.collection.at(this.collection.at(this.placeholder).get("choice2")[1]).get("question")
-				);
-			var newPlace = this.collection.at(this.placeholder).get("choice2")[1];
-			$("#answer1").text(
-				this.collection.at(newPlace).get("choice1")[0]
-				);
-			$("#answer2").text(
-				this.collection.at(newPlace).get("choice2")[0]
-				);
-			this.placeholder = newPlace;
+ 			this.helpContinue("choice2");
 			return
 		}
 	},
 
 	newGame: function(){
-		console.log('coming soon');
+ 		$("#answersContainer").remove();
+		this.render()
 	}
 
  })

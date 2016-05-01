@@ -245,13 +245,10 @@ app.TallyAnswers = Backbone.View.extend({
 	nextPhase: function(){
 		console.log(this.answers);
 		var newGuy = new app.Player({name: this.ourName});
-		// this.collection.add(newGuy);
 		for (i=0;i<this.answers.length;i++){
 			var standIn = newGuy.get(this.answers[i][1])
 			newGuy.set(this.answers[i][1], (standIn += (this.answers[i][2])))
 		}
-		// console.log(this.collection);
-		// console.log(this.collection.where({name: this.ourName}))
 
 		//ToDo: Figure out what to do with this collection. Do I need it?
 		
@@ -315,6 +312,7 @@ app.StartGame = Backbone.View.extend({
 			$("#welcome").text(
 				this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")
 				),
+			$("#secretContainer").remove(),
 			$("#a1Container").remove(),
 			$("#a2Container").remove(),
 			$("#initial").append(
@@ -328,11 +326,12 @@ app.StartGame = Backbone.View.extend({
 	},
 
 	helpContinue: function(val1){
+		$("#secretContainer").remove();
 		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
 		if ( (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat") != "none") && 
 			(this.character.get(this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[2]) >= this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[3])){
 			$("#answersContainer").append(
-				"<div class='answers'>"+
+				"<div class='answers' id='secretContainer'>"+
 				"<p id='secretToEveryone'>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[0]+"</p>"+
 				"</div>"
 				)
@@ -367,6 +366,7 @@ app.StartGame = Backbone.View.extend({
  			this.helpContinue("choice2");
 			return
 		}	else if (e.target.id == "secretToEveryone"){
+			console.log(this.collection.at(this.placeholder).get("secretStat")[1]);
 			if (this.collection.at(this.collection.at(this.placeholder).get("secretStat")[1]).get("ending") != null){
 				this.helpFill("secretStat"); 	  	
 				return;			

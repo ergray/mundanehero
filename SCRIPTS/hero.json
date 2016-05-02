@@ -16,13 +16,15 @@
 		"id" : 2,
 		"question": "You pull up the covers and wrap yourself tightly to fend off the noise. It isn't perfect, but after ten minutes or so you start to feel relaxed and find yourself drifting in and out of a sort of half-sleep. This state is interrupted, however, by a tremendous sound of breaking glass and as you sit up in bed you see that your window has been broken and a long piece of rebar has lodged itself in your floor. Rain comes in through your broken window.",
 		"choice1": ["Take a look out the window",5],
-		"choice2": ["Try to do something about your new decoration.",6]
+		"choice2": ["Try to do something about your new decoration.",6],
+		"secretStat" : ["Pull the rebar out of the floor", 7, "fitness", 2, "#answer2"]
 	},
 	{	
 		"id" : 3,
-		"question": "Although you're a bit worried about the amount of people nearby, you manage to find a dumpster to jump behind and change into your outfit. You stash your suitcase and run up to accident. There are a few calls at you 'Hey [superheroname]!', and a few more that you pick up asking who you are and 'Where's [more popular superhero]'. It takes a bit more effort than you would expect but you manage to pry off the door of the car and carefully you extract the person from the vehicle. They seem a bit cut up and shaken, but their breathing is steady. The crowd presses in upon you.",
-		"choice1": ["Stick around and chat with the crowd a bit",8],
-		"choice2": ["Grab your suitcase and get out of there",9]
+		"question": "According to the news, Terrible Monty and The Weather Channeler, have been fighting for the last hour throughout the city. Terrible Monty had just broken out of jail following his latest incarceration. Rumor is that there were other super-powered individuals involved, but at this time those details are sparse. The television goes on to talk about the history of Monty and his latest crime, but you are interrupted from viewing as you hear the sound glass breaking coming from your room. As you enter your room to investigate, you feel a draft of warm air and see, stuck in the middle of the floor, a long piece of rebar.",
+		"choice1": ["Get your things together and make your way out of the building",4],
+		"choice2": ["Try to do something about your new decoration.",6],
+		"secretStat" : ["Pull the rebar out of the floor", 7, "fitness", 2, "#answer2"]
 	},
 	{
 		"id" : 4,

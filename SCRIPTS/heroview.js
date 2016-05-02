@@ -87,7 +87,6 @@ app.Questions = Backbone.View.extend({
 	},
 
 	render: function(name){
-		console.log(this.collection);
 		this.collection.fetch({
 			data: {
 				name: name
@@ -243,7 +242,6 @@ app.TallyAnswers = Backbone.View.extend({
 	},
 
 	nextPhase: function(){
-		console.log(this.answers);
 		var newGuy = new app.Player({name: this.ourName});
 		for (i=0;i<this.answers.length;i++){
 			var standIn = newGuy.get(this.answers[i][1])
@@ -270,7 +268,6 @@ app.StartGame = Backbone.View.extend({
 
  	initialize: function(options){
  		this.character = options.character;
- 		console.log(this.character);
 		this.collection = new app.ChooseChoices();
 		this.render()
  	},
@@ -326,6 +323,7 @@ app.StartGame = Backbone.View.extend({
 	},
 
 	helpContinue: function(val1){
+		//Check question for possible extras due to stats, then check against player stats
 		$("#secretContainer").remove();
 		var newPlace = this.collection.at(this.placeholder).get(val1)[1];
 		if ( (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat") != "none") && 
@@ -336,6 +334,26 @@ app.StartGame = Backbone.View.extend({
 				"</div>"
 				)
 		}
+		//Check if secret stat causes a substitution of choices, rather than an addition to
+		if (this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[4]){
+				return (
+				$("#welcome").text(
+					this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")
+					),
+				$("#answer1").text(
+					this.collection.at(newPlace).get("choice1")[0]
+					),
+				$("#answer2").text(
+					this.collection.at(newPlace).get("choice2")[0]
+					),
+				$(this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[4]).text(
+					this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("secretStat")[0]
+					),
+				$("#secretContainer").remove(),
+				this.placeholder = newPlace
+			)
+		} else {
+		//No stats or other things? Continue as normal.
 		return (
 			$("#welcome").text(
 				this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("question")
@@ -348,8 +366,10 @@ app.StartGame = Backbone.View.extend({
 				),
 			this.placeholder = newPlace
 			)
+		}
 	},
 
+	//Check if player is about to reach an ending point, which calls a separate function, and if not, use helper functions to move to the next point
 	nextPlease: function(e){
 		if (e.target.id == "answer1"){
 			if (this.collection.at(this.collection.at(this.placeholder).get("choice1")[1]).get("ending") != null){
@@ -366,7 +386,6 @@ app.StartGame = Backbone.View.extend({
  			this.helpContinue("choice2");
 			return
 		}	else if (e.target.id == "secretToEveryone"){
-			console.log(this.collection.at(this.placeholder).get("secretStat")[1]);
 			if (this.collection.at(this.collection.at(this.placeholder).get("secretStat")[1]).get("ending") != null){
 				this.helpFill("secretStat"); 	  	
 				return;			

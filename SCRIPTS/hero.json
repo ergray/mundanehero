@@ -41,15 +41,16 @@
 	},
 	{	
 		"id" : 6,
-		"question": "secret path!",
-		"choice1": ["what ya mean",9999],
-		"choice2": ["feel ya",9998]
+		"question": "It is difficult to get a good grip on the rebar. It is wet from the rain outside and even after wiping it off with a towel you find you just don't have the strength to pull it out of the floor. While you attempt to remove it, you start to hear noises coming from the hallway outside your apartment.",
+		"choice1": ["Go investigate",15],
+		"choice2": ["Stay in your apartment and wait out the fight",16]
 	},
 	{	
 		"id" : 7,
-		"question": "secret path!",
-		"choice1": ["what ya mean",9999],
-		"choice2": ["feel ya",9998]
+		"question": "It takes some effort, but you manage to successfully pull the rebar from the floor. It's about two yards long. Although you aren't sure why, you feel like this is importnat somehow, as if you'd accomplished some significant task. From outside your apartment, you hear sounds in the hallway.",
+		"choice1": ["Investiage the hallway",17],
+		"choice2": ["Stay in your apartment and wait out the fight",16],
+		"secretStat" ["Throw the rebar back at the fighters on the roof.",17,"angry",2,"#answer2"]
 	},
 	{	
 		"id" : 8,

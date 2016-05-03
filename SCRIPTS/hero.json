@@ -28,14 +28,16 @@
 	},
 	{
 		"id" : 4,
-		"question": "But the police do not show up in time. Later, at the water cooler, while you think about who you used to be, Sarah mentions an accident she saw on her way to work. 'It was horrible. A truck flipped over and an ambulance was taking away a body. The body was all cover in a sheet you couldn't see anything. What a terrible way to start my day!' You crumple your water cup without thinking about it, water spilling onto the floor. Sarah doesn't say anything, just walks away.",
-		"ending" : "The rest of your life is much the same, missing opportunities and thinking about grander times. Maybe next time will go better?"
-	},
+		"question": "You pack a suitcase quickly. A few shirts and a pair of pants. Some important documents: passport, birth certificate. You lock the door on your way out because you can't be sure you won't be coming back here. But the chances don't seem good. Your cousin, Charlie, had been in a tall building once and when a 'hero' had attempted to leap over it instead they crashed right into the building and ruptured a gas pipe, set the whole place on fire. Not many people made it out. You didn't know Charlie all that well, but you learned a lesson from her: don't stay in a building if supers are around. Some of your neighbors have the same idea and are racing down the stairs. Two people are waiting on the elevator.",
+		"choice1": ["Take the elevator", 11],
+		"choice2": ["Take the stairs", 12]
+	},	
 	{	
 		"id" : 5,
-		"question": "secret path!",
-		"choice1": ["what ya mean",9999],
-		"choice2": ["feel ya",9998]
+		"question": "Rain and heat meet you at the window. On the roof of the building across from you, you can make out two figures fighting. They grapple and twist, and it is difficult to see who is up there. Mantis-Man-Man? Too few arms. Optical Delusion? No, he wouldn't be on top of a roof. The storm outside is chaotic, the rain building and dying and repeating. In the distance lightning strikes a building and thunder comes calling. You've never been so close to a battle before. You're not sure how long this might last or what might happen.",
+		"choice1": ["Try and go back to bed", 13],
+		"choice2": ["Dislodge the rebar from your floor", 6],
+		"secretStat" : ["Keep watching out the window", 14, "worshipper", 1]
 	},
 	{	
 		"id" : 6,

@@ -28,7 +28,7 @@
 	},
 	{
 		"id" : 4,
-		"question": "You pack a suitcase quickly. A few shirts and a pair of pants. Some important documents: passport, birth certificate. You lock the door on your way out because you can't be sure you won't be coming back here. But the chances don't seem good. Your cousin, Charlie, had been in a tall building once and when a 'hero' had attempted to leap over it instead they crashed right into the building and ruptured a gas pipe, set the whole place on fire. Not many people made it out. You didn't know Charlie all that well, but you learned a lesson from her: don't stay in a building if supers are around. Some of your neighbors have the same idea and are racing down the stairs. Two people are waiting on the elevator.",
+		"question": "You pack a suitcase quickly. A few shirts and a pair of pants. Some important documents: passport, birth certificate. You lock the door on your way out because you can't be sure you won't be coming back here. But the chances don't seem good. Your cousin, Charlie, had been in a tall building once and when a 'hero' had attempted to leap over it instead they crashed right into the building and ruptured a gas pipe, set the whole place on fire. Not many people made it out. You didn't know Charlie all that well, but you learned a lesson from her: don't stay in a building if supers are around. Some of your neighbors have the same idea and are racing down the stairs. A group of people are waiting on the elevator.",
 		"choice1": ["Take the elevator", 11],
 		"choice2": ["Take the stairs", 12]
 	},	
@@ -50,24 +50,60 @@
 		"question": "It takes some effort, but you manage to successfully pull the rebar from the floor. It's about two yards long. Although you aren't sure why, you feel like this is importnat somehow, as if you'd accomplished some significant task. From outside your apartment, you hear sounds in the hallway.",
 		"choice1": ["Investiage the hallway",17],
 		"choice2": ["Stay in your apartment and wait out the fight",16],
-		"secretStat" ["Throw the rebar back at the fighters on the roof.",17,"angry",2,"#answer2"]
+		"secretStat" ["Throw the rebar back at the fighters on the roof.",18,"angry",2,"#answer2"]
 	},
 	{	
 		"id" : 8,
-		"question": "secret path!",
-		"choice1": ["what ya mean",9999],
-		"choice2": ["feel ya",9998]
+		"question": "Ms. Daniels shoes your hands away, and calls out for her cat. 'Mandy mandy mandy!', but it is nowhere to be seen or heard. Perhaps it ran to its home or maybe it just ran down the stairs. Ms. Daniels is in a bit of a state, calling out and shuffling in tiny circles. She grabs out at you and asks for your help: 'We have to find her! She can't survive if the building falls!' The sound of the building's groaning is just getting louder. Next to you, the elevator dings and its doors open, empty of passengers.",
+		"choice1": ["Shove Ms. Daniels into the elevator",19],
+		"choice2": ["Look for the cat a little longer",20]
 	},
 	{	
 		"id" : 9,
-		"question": "secret path!",
-		"choice1": ["what ya mean",9999],
-		"choice2": ["feel ya",9998]
+		"question": "You follow the rest of the crowd and leave Ms. Daniels behind. The crush of residents seems split on what to do however, with most of them heading down the stairs and others actually headed up towards the roof.",
+		"choice1": ["Follow the stairs up",21],
+		"choice2": ["Follow the stairs down",22]
 	},
 	{	
 		"id" : 10,
 		"question": "You just can't resist watching. After all the years you've spent in this city, it just never seems to get old. The storm seems to let up, but the lights are still flashing outside as the figures strike out at each other. You can see them take the fight to the rooftop across from your building, and as they are fighting one of them seems to rip something out of the roof itself, an antenna or pipe. The figure then hurls the object at its foe, who manages to dodge it. You have only a second to realize that by dodging the projectile, it has caused the object to continue along its path: right towards you. There is the crash of breaking glass as the rod smashes into your apartment and then all you can pay attention to is the pain of it lodging itself in your throat. Death comes quickly, mercifully.",
 		"ending": "Superheroes, am I right? Maybe they will mention your name in the obituary page."
+	},
+	{
+		"id" : 11,
+		"question": "Despite most of the warnings you've heard over your life about elevators in emergencies, you decide to go for it. There are about 15 people waiting outside the doors. You see Ms. Daniels, standing in the middle of the group, hugging her cat tightly to her. You can't remember its name exactly, something like 'Daisy' or 'Fern'. Everyone is talking about the fight outside. After a couple minutes of waiting you see the arrow of the elevator change position from pointing down to pointing up. This change is followed by the building shaking. You can hear the building groaning. In front of you, the group waiting for the elevator falls into panic and almost at once rushes towards the stairs. Ms. Daniels is caught up in the crush and loses her grip on her cat. She falls over and her cat goes running between the feet of the crowd."
+		"choice1" : ["Help Ms. Daniels",8],
+		"choice2" : ["Run for the stairs",9]
+	},
+	{
+		"id" : 12,
+		"question" : "Everyone is running down the stairs. There is a little pushing and angry shouting for others to hurry up. Some are talking with each other about the fight across the street as they run, comparing it to the building that fell from a fight on the West coast. As you run you can feel a shaking begin in the building, and a tremor that runs through the stairs and then disappears. By the time you reach the bottom of the stairs you feel exhausted and your suitcase feels infinitely heavier than it started. Outside of the building you get a closer look at the evacuues: people in just pajamas, carrying small items, a few pets, children close by their parents. Some are making their way around the building to get a view of the fight taking place on the other building, others are just putting as much distance between themselves and the building as possible.",
+		"choice1" : ["Try to get a better view of what's happening", 23],
+		"choice2" : ["Get as far away as possible", 24]
+	},
+	{
+		"id" : 13,
+	},
+	{
+		"id" : 14,
+	},
+	{
+		"id" : 15,
+	},
+	{
+		"id" : 16,
+	},
+	{
+		"id" : 17,
+	},
+	{
+		"id" : 18,
+	},
+	{
+		"id" : 19,
+	},
+	{
+		"id" : 20,
 	}
 ]
 

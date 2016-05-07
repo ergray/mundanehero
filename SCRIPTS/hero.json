@@ -50,7 +50,7 @@
 		"question": "It takes some effort, but you manage to successfully pull the rebar from the floor. It's about two yards long. Although you aren't sure why, you feel like this is importnat somehow, as if you'd accomplished some significant task. From outside your apartment, you hear sounds in the hallway.",
 		"choice1": ["Investiage the hallway",17],
 		"choice2": ["Stay in your apartment and wait out the fight",16],
-		"secretStat" ["Throw the rebar back at the fighters on the roof.",18,"angry",2,"#answer2"]
+		"secretStat": ["Throw the rebar back at the fighters on the roof.",18,"angry",2,"#answer2"]
 	},
 	{	
 		"id" : 8,
@@ -71,7 +71,7 @@
 	},
 	{
 		"id" : 11,
-		"question": "Despite most of the warnings you've heard over your life about elevators in emergencies, you decide to go for it. There are about 15 people waiting outside the doors. You see Ms. Daniels, standing in the middle of the group, hugging her cat tightly to her. You can't remember its name exactly, something like 'Daisy' or 'Fern'. Everyone is talking about the fight outside. After a couple minutes of waiting you see the arrow of the elevator change position from pointing down to pointing up. This change is followed by the building shaking. You can hear the building groaning. In front of you, the group waiting for the elevator falls into panic and almost at once rushes towards the stairs. Ms. Daniels is caught up in the crush and loses her grip on her cat. She falls over and her cat goes running between the feet of the crowd."
+		"question": "Despite most of the warnings you've heard over your life about elevators in emergencies, you decide to go for it. There are about 15 people waiting outside the doors. You see Ms. Daniels, standing in the middle of the group, hugging her cat tightly to her. You can't remember its name exactly, something like 'Daisy' or 'Fern'. Everyone is talking about the fight outside. After a couple minutes of waiting you see the arrow of the elevator change position from pointing down to pointing up. This change is followed by the building shaking. You can hear the building groaning. In front of you, the group waiting for the elevator falls into panic and almost at once rushes towards the stairs. Ms. Daniels is caught up in the crush and loses her grip on her cat. She falls over and her cat goes running between the feet of the crowd.",
 		"choice1" : ["Help Ms. Daniels",8],
 		"choice2" : ["Run for the stairs",9]
 	},

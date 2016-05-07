@@ -185,6 +185,7 @@ app.TallyAnswers = Backbone.View.extend({
 	},
 
 	render: function(){
+		console.log(this.collection);
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);

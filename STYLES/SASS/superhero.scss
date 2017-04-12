@@ -80,13 +80,22 @@ input[type=text] {
 .answers {
 	width: 150px;
 	height: 150px;
-	padding: 10px;
+	/*padding: 10px;*/
 	cursor: pointer;
 	display: flex;
 	justify-content: center;
     align-items: center;
 	background-color: #464646;
 	color: #fff;
+}
+
+.answers p {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	align-items: center;
+	justify-content: center;
 }
 
 .answers:hover {
@@ -98,6 +107,12 @@ input[type=text] {
 
 #answer2 {
 }
+
+/*
+.clickable {
+	padding: 30%;
+}
+*/
 
 #checkAnswers {
 	padding: 50px 0;

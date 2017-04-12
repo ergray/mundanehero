@@ -105,10 +105,10 @@ app.Questions = Backbone.View.extend({
 		$("#initial").append(
 			"<div id='answersContainer'>"+
 			"<div id='a1Container'>"+
-			"<div class='answers'><p id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
+			"<div class='answers'><p class='clickable' id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
 			"</div>"+
 			"<div id='a2Container'>"+
-			"<div class='answers'><p id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
+			"<div class='answers'><p class='clickable' id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
 			"</div>"+
 			"</div>"
 			);
@@ -291,10 +291,10 @@ app.StartGame = Backbone.View.extend({
 		$("#initial").append(
 			"<div id='answersContainer'>"+
 			"<div id='a1Container'>"+
-			"<div class='answers'><p id='answer1'>"+collection.at(0).get("choice1")[0]+"</p></div>"+
+			"<div class='answers'><p class='clickable' id='answer1'>"+collection.at(0).get("choice1")[0]+"</p></div>"+
 			"</div>"+
 			"<div id='a2Container'>"+
-			"<div class='answers'><p id='answer2'>"+collection.at(0).get("choice2")[0]+"</p></div>"+
+			"<div class='answers'><p class='clickable' id='answer2'>"+collection.at(0).get("choice2")[0]+"</p></div>"+
 			"</div>"+
 			"</div>"
 			);

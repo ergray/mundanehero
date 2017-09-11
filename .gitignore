@@ -5,3 +5,7 @@ coverage/
 .idea/
 .tmp/
 dist/
+.DS_Store
+superhero.scss
+superhero.css.map
+gulpfile.js

@@ -104,11 +104,13 @@ app.Questions = Backbone.View.extend({
 		$("#initial #subheader").show();
 		$("#initial").append(
 			"<div id='answersContainer'>"+
-			"<div id='a1Container'>"+
-			"<div class='answers'><p class='clickable' id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
+			"<div class='answers' id='a1Container'>"+
+			// "<div class='answers'><p id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
+			"<div><p id='answer1'>"+collection.get(0).get("answerOne")[0]+"</p></div>"+
 			"</div>"+
-			"<div id='a2Container'>"+
-			"<div class='answers'><p class='clickable' id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
+			"<div class='answers' id='a2Container'>"+
+			// "<div class='answers'><p id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
+			"<div><p id='answer2'>"+collection.get(0).get("answerTwo")[0]+"</p></div>"+
 			"</div>"+
 			"</div>"
 			);
@@ -185,7 +187,6 @@ app.TallyAnswers = Backbone.View.extend({
 	},
 
 	render: function(){
-		console.log(this.collection);
 		$("#initial").append(
 			"<div id='checkAnswers'></div>"
 			);
@@ -283,18 +284,16 @@ app.StartGame = Backbone.View.extend({
  	},
 
 	onSuccess: function(collection, response, options){
-		console.log(collection);
-		console.log(collection.at(0).get("question"));
 		$("#welcome").text(
 			collection.at(0).get("question")
 			);
 		$("#initial").append(
 			"<div id='answersContainer'>"+
 			"<div id='a1Container'>"+
-			"<div class='answers'><p class='clickable' id='answer1'>"+collection.at(0).get("choice1")[0]+"</p></div>"+
+			"<div class='answers'><p id='answer1'>"+collection.at(0).get("choice1")[0]+"</p></div>"+
 			"</div>"+
 			"<div id='a2Container'>"+
-			"<div class='answers'><p class='clickable' id='answer2'>"+collection.at(0).get("choice2")[0]+"</p></div>"+
+			"<div class='answers'><p id='answer2'>"+collection.at(0).get("choice2")[0]+"</p></div>"+
 			"</div>"+
 			"</div>"
 			);
@@ -313,12 +312,13 @@ app.StartGame = Backbone.View.extend({
 			$("#secretContainer").remove(),
 			$("#a1Container").remove(),
 			$("#a2Container").remove(),
-			$("#initial").append(
-			"<div id='answersContainer'>"+
+			$("#answersContainer").append(
+			// $("#initial").append(
+			// "<div id='answersContainer'>"+
 				"<div class='answers' id='startOver'>"+
 				"<p id='theEnd'>"+this.collection.at(this.collection.at(this.placeholder).get(val1)[1]).get("ending")+"</p>"+
-				"</div>"+
 				"</div>"
+				// "</div>"
 				)
 			)
 	},
